@@ -1,14 +1,16 @@
 package edu.uw.tacoma.mmuppa.fragmentslabpractice;
 
-import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class StudentActivityDynamic extends Activity
+public class StudentActivityDynamic extends AppCompatActivity
                 implements StudentListFragment.OnFragmentInteractionListener {
 
+    private static String TAG = "StudentDynamicActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +23,7 @@ public class StudentActivityDynamic extends Activity
             StudentListFragment firstFragment = new StudentListFragment();
 
             // Add the fragment to the 'fragment_container' FrameLayout
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .add(R.id.student_fragment_container, firstFragment).commit();
         }
     }
@@ -52,9 +54,10 @@ public class StudentActivityDynamic extends Activity
     public void onFragmentInteraction(int id) {
       // Capture the student fragment from the activity layout
         StudentFragment studentFragment = (StudentFragment)
-                getFragmentManager().findFragmentById(R.id.student_fragment);
+                getSupportFragmentManager().findFragmentById(R.id.student_fragment);
 
         if (studentFragment != null) {
+            Log.i(TAG, "two pane layout");
             // If article frag is available, we're in two-pane layout...
 
             // Call a method in the student fragment to update its content
@@ -70,7 +73,7 @@ public class StudentActivityDynamic extends Activity
             Bundle args = new Bundle();
             args.putInt(StudentFragment.ARG_POSITION, id);
             newFragment.setArguments(args);
-            FragmentTransaction transaction = getFragmentManager()
+            FragmentTransaction transaction = getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.student_fragment_container, newFragment)
                     .addToBackStack(null);

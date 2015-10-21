@@ -1,9 +1,8 @@
 package edu.uw.tacoma.mmuppa.fragmentslabpractice;
 
-import android.app.Activity;
-import android.app.ListFragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
